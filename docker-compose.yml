@@ -28,7 +28,9 @@ services:
 
   redis:
     image: redis:7-alpine
-    command: redis-server --maxmemory 100mb --maxmemory-policy allkeys-lru
+    command: redis-server --maxmemory 100mb --maxmemory-policy allkeys-lru --appendonly yes
+    volumes:
+      - redis-data:/data
     ports: ["6379:6379"]
     mem_limit: 128m
     healthcheck:
@@ -48,3 +50,4 @@ services:
 volumes:
   pgdata:
   chromadata:
+  redis-data:
